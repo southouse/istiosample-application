@@ -1,10 +1,10 @@
-package com.southouse.istio.sample.user;
+package com.southouse.istio.sample.customer;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class UserApplicationTests {
+class CustomerApplicationTests {
 
 	@Test
 	void contextLoads() {

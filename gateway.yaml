@@ -27,10 +27,10 @@ spec:
   http:
   - match:
     - uri:
-        prefix: /api/v1/users
+        prefix: /api/v1/customer
     route:
     - destination:
-        host: user # Target Service Name
+        host: customer # Target Service Name
         port:
           number: 9001 # Target Service Port
   - match:
