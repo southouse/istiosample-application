@@ -14,4 +14,9 @@ public class BookingController {
         return "You hit '" + request.getRequestURI() + "'";
     }
 
+    @GetMapping("booking/canary")
+    public String canary(HttpServletRequest request) {
+        return "You hit '" + request.getRequestURI() + "'";
+    }
+
 }

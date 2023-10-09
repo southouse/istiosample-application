@@ -37,9 +37,12 @@ spec:
         app: customer
         version: v1
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: minikube
       containers:
       - name: customer
         image: southouse/istio-sample-customer
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
           protocol: TCP

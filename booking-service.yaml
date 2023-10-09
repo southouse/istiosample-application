@@ -37,9 +37,12 @@ spec:
         app: booking
         version: v1
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: minikube-m02
       containers:
       - name: booking
         image: southouse/istio-sample-booking
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
           protocol: TCP

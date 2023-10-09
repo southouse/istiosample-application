@@ -18,6 +18,11 @@ public class CustomerController {
         return "You hit '" + request.getRequestURI() + "'";
     }
 
+    @GetMapping("customer/canary")
+    public String canary(HttpServletRequest request) {
+        return "You hit '" + request.getRequestURI() + "'";
+    }
+
     @GetMapping("customer/{no}")
     public Customer getCustomer(@PathVariable(name = "no", required = true) Long no) {
         Customer customer = customerService.getCustomer(no);
@@ -29,5 +34,4 @@ public class CustomerController {
     public void createCustomer(@RequestBody Customer customer) {
         customerService.createCustomer(customer);
     }
-
 }

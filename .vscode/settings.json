@@ -1,0 +1,5 @@
+{
+    "yaml.schemas": {
+        "https://json.schemastore.org/kustomization.json": "file:///Users/southouse/workspace/southouse/kubernetes/study/istiosample-application/gateway.yaml"
+    }
+}

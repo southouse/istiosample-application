@@ -20,32 +20,76 @@ kind: VirtualService
 metadata:
   name: istiosample
 spec:
-  hosts:
+  hosts: # Service List
+  # - "customer.default.svc.cluster.local"
+  # - "booking.default.svc.cluster.local"
+  # - "shopping.default.svc.cluster.local"
   - "*"
   gateways:
   - istiosample-gateway
   http:
-  - match:
+  - match: # With canary using host headers
+    - headers:
+        end-user:
+          exact: "testers"
+    route: 
+    - destination:
+        host: customer.default.svc.cluster.local # Target Service Name
+        subset: v1
+        port:
+          number: 9001 # Target Service Port
+      weight: 50
+    - destination:
+        host: customer.default.svc.cluster.local
+        subset: v2
+        port:
+          number: 9001
+      weight: 50
+    timeout: 10s
+  - match: # For users
     - uri:
         prefix: /api/v1/customer
     route:
     - destination:
-        host: customer # Target Service Name
+        host: customer.default.svc.cluster.local
+        subset: v1
         port:
-          number: 9001 # Target Service Port
+          number: 9001
+    timeout: 10s
+  # - match: # With canary using host headers
+  #   - headers:
+  #       end-user:
+  #         exact: "testers"
+  #   route: 
+  #   - destination:
+  #       host: booking.default.svc.cluster.local # Target Service Name
+  #       subset: v1
+  #       port:
+  #         number: 9001 # Target Service Port
+  #     weight: 50
+  #   - destination:
+  #       host: booking.default.svc.cluster.local
+  #       subset: v2
+  #       port:
+  #         number: 9001
+  #     weight: 50
+  #   timeout: 10s
   - match:
     - uri:
         prefix: /api/v1/booking
     route:
     - destination:
-        host: booking
+        host: booking.default.svc.cluster.local
+        subset: v1
         port:
           number: 9001
+    timeout: 10s
   - match:
     - uri:
         prefix: /api/v1/shopping
     route:
     - destination:
-        host: shopping
+        host: shopping.default.svc.cluster.local
         port:
           number: 9001
+    timeout: 10s

@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: customer-v2
+  labels:
+    app: customer
+    version: v2
+spec:
+  selector:
+    matchLabels:
+      app: customer
+      version: v2
+  template:
+    metadata:
+      labels:
+        app: customer
+        version: v2
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: minikube
+      containers:
+      - name: customer
+        image: southouse/istio-sample-customer:0.0.2-SNAPSHOT
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+          protocol: TCP

@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: booking-v2
+  labels:
+    app: booking
+    version: v2
+spec:
+  selector:
+    matchLabels:
+      app: booking
+      version: v2
+  template:
+    metadata:
+      labels:
+        app: booking
+        version: v2
+    spec:
+      nodeSelector:
+        kubernetes.io/hostname: minikube-m02
+      containers:
+      - name: booking
+        image: southouse/istio-sample-booking:0.0.2-SNAPSHOT
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+          protocol: TCP

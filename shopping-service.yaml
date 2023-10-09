@@ -37,9 +37,12 @@ spec:
         app: shopping
         version: v1
     spec:
+      nodeSelector:
+        kubernetes.io/hostname: minikube-m03
       containers:
       - name: shopping
         image: southouse/istio-sample-shopping
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 8080
           protocol: TCP
